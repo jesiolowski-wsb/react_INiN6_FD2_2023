@@ -14,8 +14,20 @@ function Counters() {
     setCounters(counters.filter((c) => c.id !== id));
   };
 
+  const handleReset = () => {
+    const countersReset = counters.map((c) => {
+      c.value = 0;
+      return c;
+    });
+
+    setCounters(countersReset);
+  };
+
   return (
     <>
+      <button className="btn btn-small btn-primary m-2" onClick={handleReset}>
+        reset
+      </button>
       {counters.map((counter) => (
         <Counter key={counter.id} onDelete={handleDelete} counter={counter}>
           <h4>Counter no: {counter.id}</h4>
