@@ -4,7 +4,7 @@ import Counter from "./counter";
 function Counters() {
   const [counters, setCounters] = useState([
     { id: 1, value: 10 },
-    { id: 2, value: 20 },
+    { id: 2, value: 20, costam: { asdasd: 333, djkd: 44 } },
     { id: 3, value: 30 },
     { id: 4, value: 40 },
     { id: 5, value: 87 },
@@ -12,6 +12,14 @@ function Counters() {
 
   const handleDelete = (id) => {
     setCounters(counters.filter((c) => c.id !== id));
+  };
+
+  const handleIncrement = (counter) => {
+    const countersUpdated = [...counters];
+    const index = countersUpdated.indexOf(counter);
+    countersUpdated[index] = { ...counter };
+    countersUpdated[index].value++;
+    setCounters(countersUpdated);
   };
 
   const handleReset = () => {
@@ -29,7 +37,12 @@ function Counters() {
         reset
       </button>
       {counters.map((counter) => (
-        <Counter key={counter.id} onDelete={handleDelete} counter={counter}>
+        <Counter
+          key={counter.id}
+          onDelete={handleDelete}
+          onIncrement={handleIncrement}
+          counter={counter}
+        >
           <h4>Counter no: {counter.id}</h4>
         </Counter>
       ))}
